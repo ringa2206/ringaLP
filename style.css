@@ -458,6 +458,20 @@ h1, h2, h3, .logo {
     background-color: rgba(255, 255, 255, 0.05); /* フォールバック背景 */
 }
 
+/* 画像が読み込めない場合の代替テキスト（画像の裏に配置） */
+.thumbnail-link::before {
+    content: "Loading / No Image";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--gold);
+    font-size: 1rem;
+    font-family: 'Noto Sans JP', sans-serif;
+    z-index: 1;
+}
+
 .thumbnail-link img {
     position: absolute;
     top: 0;
@@ -465,17 +479,10 @@ h1, h2, h3, .logo {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    z-index: 2;
     transition: transform 0.3s ease;
-    /* 画像が読み込まれない場合や読み込み中の代替スタイル */
-    background-color: rgba(255, 255, 255, 0.05);
-    color: var(--gold);
-    font-size: 1.1rem;
-    font-family: 'Noto Sans JP', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 1rem;
+    /* Chromeバグ回避のため、画像が壊れた場合のデフォルトテキストを透過 */
+    color: transparent;
 }
 
 .thumbnail-link:hover img {
